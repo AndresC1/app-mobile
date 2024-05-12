@@ -37,4 +37,12 @@ public class HomeView extends AppCompatActivity {
             startActivity(new Intent(this, CreateNoteView.class));
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NoteDB noteDB = new NoteDB(getApplicationContext());
+        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll());
+        listView.setAdapter(customBaseAdapter);
+    }
 }
