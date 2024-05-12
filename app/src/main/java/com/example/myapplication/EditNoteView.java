@@ -33,7 +33,7 @@ public class EditNoteView extends AppCompatActivity {
 
             TextView title = (TextView) findViewById(R.id.editNoteTitle);
             title.setText(noteTitle);
-            TextView description = (TextView) findViewById(R.id.editNoteDescription);
+            TextView description = (TextView) findViewById(R.id.TxtNewNoteDescription);
             description.setText(noteDescription);
         }
     }
