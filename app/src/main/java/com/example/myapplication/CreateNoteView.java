@@ -33,7 +33,7 @@ public class CreateNoteView extends AppCompatActivity {
         findViewById(R.id.btnSaveNewNote).setOnClickListener(v -> {
             try{
                 String newNoteTitle = ((EditText) findViewById(R.id.TxtNewNoteTitle)).getText().toString();
-                String newNoteDescription = ((EditText) findViewById(R.id.TxtNewNoteDescription)).getText().toString();
+                String newNoteDescription = ((EditText) findViewById(R.id.TxtUpdateDescriptionNote)).getText().toString();
                 Date date = new Date();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String created_at = formatter.format(date);
