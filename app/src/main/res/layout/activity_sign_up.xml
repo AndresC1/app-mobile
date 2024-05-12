@@ -5,10 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:backgroundTint="#fff"
-    android:backgroundTintMode="src_atop"
-    tools:context=".MainActivity">
+    tools:context=".SignUp">
 
     <TextView
         android:id="@+id/textView"
@@ -16,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Login to your Account"
+        android:text="Create your Account"
         android:textColor="#666666"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -62,34 +59,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:width="280dp"
-        android:background="@drawable/background_with_shadow"
-        android:backgroundTint="#040957"
-        android:text="Sign In"
-        android:textColorLink="#040957"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Don't have an account?"
-        android:textColor="#888"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="244dp"
@@ -100,17 +69,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/logo_tactic" />
 
-    <TextView
+    <EditText
+        android:id="@+id/txtConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:width="280dp"
+        android:background="@drawable/background_with_shadow"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="#333"
+        android:shadowDx="2.45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+    <Button
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="50dp"
-        android:labelFor="@id/textView"
-        android:text="Sign up"
-        android:textColor="#040957"
+        android:layout_marginTop="24dp"
+        android:width="280dp"
+        android:background="@drawable/background_with_shadow"
+        android:backgroundTint="#040957"
+        android:text="Sign Up"
+        android:textColorLink="#040957"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtConfirmPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

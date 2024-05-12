@@ -1,0 +1,40 @@
+package com.example.myapplication;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class EditNoteView extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_edit_note_view);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        Intent intent = getIntent();
+        if(intent != null){
+            String noteTitle = intent.getStringExtra("title");
+            String noteDescription = intent.getStringExtra("description");
+            String noteCreated_at = intent.getStringExtra("created_at");
+            String noteUpdated_at = intent.getStringExtra("updated_at");
+            int noteId = intent.getIntExtra("id", 0);
+
+            TextView title = (TextView) findViewById(R.id.editNoteTitle);
+            title.setText(noteTitle);
+            TextView description = (TextView) findViewById(R.id.editNoteDescription);
+            description.setText(noteDescription);
+        }
+    }
+}
