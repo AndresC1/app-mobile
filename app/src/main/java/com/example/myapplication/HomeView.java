@@ -30,7 +30,7 @@ public class HomeView extends AppCompatActivity {
         NoteDB noteDB = new NoteDB(getApplicationContext());
 
         listView = (ListView) findViewById(R.id.NotesListView);
-        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll());
+        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(), this);
         listView.setAdapter(customBaseAdapter);
 
         findViewById(R.id.btnCreateNewNote).setOnClickListener(v -> {
@@ -42,7 +42,13 @@ public class HomeView extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         NoteDB noteDB = new NoteDB(getApplicationContext());
-        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll());
+        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(), this);
+        listView.setAdapter(customBaseAdapter);
+    }
+
+    public void reloadListView(){
+        NoteDB noteDB = new NoteDB(getApplicationContext());
+        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(), this);
         listView.setAdapter(customBaseAdapter);
     }
 }

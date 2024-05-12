@@ -9,6 +9,7 @@ import android.content.Context;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.Repository.NoteDB;
 import com.example.myapplication.ViewModel.NotesModel;
 
 public class CustomBaseAdapetr extends BaseAdapter {
@@ -16,10 +17,12 @@ public class CustomBaseAdapetr extends BaseAdapter {
     Context context;
     NotesModel dataExample[];
     LayoutInflater inflater;
-    public CustomBaseAdapetr(Context ctx, NotesModel [] dataExample){
+    HomeView homeView;
+    public CustomBaseAdapetr(Context ctx, NotesModel [] dataExample, HomeView homeView){
         this.context = ctx;
         this.dataExample = dataExample;
         inflater = LayoutInflater.from(ctx);
+        this.homeView = homeView;
     }
     @Override
     public int getCount() {
@@ -41,6 +44,7 @@ public class CustomBaseAdapetr extends BaseAdapter {
         convertView = inflater.inflate(R.layout.activity_custom_list_view, null);
         TextView txtView = (TextView) convertView.findViewById(R.id.txtNameNote);
         Button btnEditNote = (Button) convertView.findViewById(R.id.btnEditNote);
+        Button btnDeleteNote = (Button) convertView.findViewById(R.id.btnDeleteNote);
         btnEditNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +56,15 @@ public class CustomBaseAdapetr extends BaseAdapter {
                 intent.putExtra("created_at", dataExample[position].getCreated_at());
                 intent.putExtra("updated_at", dataExample[position].getUpdated_at());
                 context.startActivity(intent);
+            }
+        });
+
+        btnDeleteNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NoteDB noteDB = new NoteDB(context);
+                noteDB.delete(dataExample[position].getId());
+                homeView.reloadListView();
             }
         });
         txtView.setText(dataExample[position].getTitle());
