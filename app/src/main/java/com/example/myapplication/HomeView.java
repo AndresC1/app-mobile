@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -41,14 +42,18 @@ public class HomeView extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        NoteDB noteDB = new NoteDB(getApplicationContext());
-        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(), this);
-        listView.setAdapter(customBaseAdapter);
+        this.reloadListView();
     }
 
     public void reloadListView(){
         NoteDB noteDB = new NoteDB(getApplicationContext());
-        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(), this);
+        NotesModel[] listData = noteDB.getAll();
+        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), listData, this);
+        if(listData.length == 0){
+            findViewById(R.id.txtEmptyList).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.txtEmptyList).setVisibility(View.GONE);
+        }
         listView.setAdapter(customBaseAdapter);
     }
 }
