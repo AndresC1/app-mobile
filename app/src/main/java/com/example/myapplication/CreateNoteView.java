@@ -11,6 +11,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.Repository.NoteDB;
 import com.example.myapplication.ViewModel.NotesModel;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +39,10 @@ public class CreateNoteView extends AppCompatActivity {
             try{
                 String newNoteTitle = ((EditText) findViewById(R.id.TxtNewNoteTitle)).getText().toString();
                 String newNoteDescription = ((EditText) findViewById(R.id.TxtUpdateDescriptionNote)).getText().toString();
+                if(validateFields(newNoteTitle, newNoteDescription)){
+                    Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Date date = new Date();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String created_at = formatter.format(date);
@@ -44,5 +53,9 @@ public class CreateNoteView extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
+
+    public boolean validateFields(String title, String description){
+        return title.isEmpty() || description.isEmpty();
     }
 }
