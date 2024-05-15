@@ -15,7 +15,7 @@ public class UserDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "users";
     private static final String COLUMN_ID = "id";
-    private static final String COLUMN_USERNAME = "username";
+    private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PASSWORD = "password";
 
     public UserDB(Context context) {
@@ -24,7 +24,7 @@ public class UserDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)");
+        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT)");
     }
 
     @Override
@@ -35,12 +35,12 @@ public class UserDB extends SQLiteOpenHelper {
 
     public void insert(UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO users (username, password) VALUES ('" + user.getUsername() + "', '" + user.getPassword() + "')");
+        db.execSQL("INSERT INTO users (email, password) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "')");
     }
 
     public void update(UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE users SET username = '" + user.getUsername() + "', password = '" + user.getPassword() + "' WHERE id = " + user.getId());
+        db.execSQL("UPDATE users SET email = '" + user.getEmail() + "', password = '" + user.getPassword() + "' WHERE id = " + user.getId());
     }
 
     public void delete(int id){

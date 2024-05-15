@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtPasswordNewUser"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -42,10 +42,10 @@
         android:textColor="#333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailNewUser" />
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtEmailNewUser"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPasswordNewUser" />
 
     <TextView
         android:id="@+id/textView2"

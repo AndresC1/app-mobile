@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtPasswordNewUser"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -39,10 +39,10 @@
         android:textColor="#333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailNewUser" />
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtEmailNewUser"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -70,7 +70,7 @@
         app:srcCompat="@mipmap/logo_tactic" />
 
     <EditText
-        android:id="@+id/txtConfirmPassword"
+        android:id="@+id/txtConfirmPasswordNewUser"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -85,7 +85,7 @@
         android:shadowDx="2.45"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPasswordNewUser" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -101,6 +101,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtConfirmPasswordNewUser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
