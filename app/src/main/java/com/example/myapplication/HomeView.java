@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,10 @@ public class HomeView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        MyApp app = (MyApp) getApplicationContext();
+        this.validateLogin();
+        Toast.makeText(this, "Welcome " + app.getUser().getEmail(), Toast.LENGTH_SHORT).show();
 
         NoteDB noteDB = new NoteDB(getApplicationContext());
 
@@ -55,5 +60,12 @@ public class HomeView extends AppCompatActivity {
             findViewById(R.id.txtEmptyList).setVisibility(View.GONE);
         }
         listView.setAdapter(customBaseAdapter);
+    }
+
+    public void validateLogin(){
+        MyApp app = (MyApp) getApplicationContext();
+        if(app.getUser() == null){
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 }

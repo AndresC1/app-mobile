@@ -33,8 +33,7 @@ public class SignUp extends AppCompatActivity {
                 String password = ((EditText) findViewById(R.id.txtPasswordNewUser)).getText().toString();
                 String confirmPassword = ((EditText) findViewById(R.id.txtConfirmPasswordNewUser)).getText().toString();
                 ValidateModel validateModel = new ValidateModel();
-                String[] fields = {email, password, confirmPassword};
-                if(validateModel.validateFields(fields)){
+                if(validateModel.validateFields(new String[]{email, password, confirmPassword})){
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -45,6 +44,10 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 UserDB userDB = new UserDB(getApplicationContext());
+                if(userDB.getUserByEmail(email) != null){
+                    Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 userDB.insert(newUser);
                 Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
                 finish();

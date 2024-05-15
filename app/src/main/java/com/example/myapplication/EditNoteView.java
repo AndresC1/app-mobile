@@ -57,8 +57,7 @@ public class EditNoteView extends AppCompatActivity {
                 String newNoteTitle = ((TextView) findViewById(R.id.TxtUpdateTitleNote)).getText().toString();
                 String newNoteDescription = ((TextView) findViewById(R.id.TxtUpdateDescriptionNote)).getText().toString();
                 ValidateModel validateModel = new ValidateModel();
-                String[] fields = {newNoteTitle, newNoteDescription};
-                if(validateModel.validateFields(fields)){
+                if(validateModel.validateFields(new String[]{newNoteTitle, newNoteDescription})){
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
