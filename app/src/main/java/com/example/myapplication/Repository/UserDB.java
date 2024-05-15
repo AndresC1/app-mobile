@@ -59,4 +59,28 @@ public class UserDB extends SQLiteOpenHelper {
         }
         return users.toArray(new UserModel[users.size()]);
     }
+
+    public boolean checkUser(String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'", null);
+        return cursor.moveToFirst();
+    }
+
+    public UserModel getUser(String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'", null);
+        if (cursor.moveToFirst()) {
+            return new UserModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        }
+        return null;
+    }
+
+    public UserModel getUserByEmail(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = '" + email + "'", null);
+        if (cursor.moveToFirst()) {
+            return new UserModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        }
+        return null;
+    }
 }
