@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.myapplication.Repository.NoteDB;
 import com.example.myapplication.ViewModel.DateModel;
 import com.example.myapplication.ViewModel.NotesModel;
+import com.example.myapplication.ViewModel.ValidateModel;
 
 public class EditNoteView extends AppCompatActivity {
     private NotesModel noteData;
@@ -42,7 +44,6 @@ public class EditNoteView extends AppCompatActivity {
                     noteCreated_at,
                     noteUpdated_at
             );
-
             TextView title = (TextView) findViewById(R.id.TxtUpdateTitleNote);
             title.setText(noteTitle);
             TextView description = (TextView) findViewById(R.id.TxtUpdateDescriptionNote);
@@ -55,6 +56,12 @@ public class EditNoteView extends AppCompatActivity {
                 DateModel date = new DateModel();
                 String newNoteTitle = ((TextView) findViewById(R.id.TxtUpdateTitleNote)).getText().toString();
                 String newNoteDescription = ((TextView) findViewById(R.id.TxtUpdateDescriptionNote)).getText().toString();
+                ValidateModel validateModel = new ValidateModel();
+                String[] fields = {newNoteTitle, newNoteDescription};
+                if(validateModel.validateFields(fields)){
+                    Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 noteData.setTitle(newNoteTitle);
                 noteData.setDescription(newNoteDescription);
                 noteData.setUpdated_at(date.getDateNow());

@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.Repository.NoteDB;
 import com.example.myapplication.ViewModel.NotesModel;
+import com.example.myapplication.ViewModel.ValidateModel;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,7 +41,9 @@ public class CreateNoteView extends AppCompatActivity {
             try{
                 String newNoteTitle = ((EditText) findViewById(R.id.TxtNewNoteTitle)).getText().toString();
                 String newNoteDescription = ((EditText) findViewById(R.id.TxtUpdateDescriptionNote)).getText().toString();
-                if(validateFields(newNoteTitle, newNoteDescription)){
+                ValidateModel validateModel = new ValidateModel();
+                String[] fields = {newNoteTitle, newNoteDescription};
+                if(validateModel.validateFields(fields)){
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -53,9 +57,5 @@ public class CreateNoteView extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-    }
-
-    public boolean validateFields(String title, String description){
-        return title.isEmpty() || description.isEmpty();
     }
 }
