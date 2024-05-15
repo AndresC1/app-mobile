@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.ListView;
 
 import com.example.myapplication.ViewModel.NotesModel;
+import com.example.myapplication.ViewModel.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,16 @@ public class NoteDB extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_TITLE = "title";
     private static final String COLUMN_DESCRIPTION = "description";
+    private static final String COLUMN_USER_ID = "user_id";
     private static final String COLUMN_CREATED_AT = "created_at";
     private static final String COLUMN_UPDATED_AT = "updated_at";
     public NoteDB(Context context) {
-        super(context, "NoteDB", null, 1);
+        super(context, "NoteDB", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, created_at TEXT, updated_at TEXT)");
+        db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, user_id TEXT, created_at TEXT, updated_at TEXT)");
     }
 
     @Override
@@ -38,7 +40,7 @@ public class NoteDB extends SQLiteOpenHelper {
 
     public void insert(NotesModel note){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO notes (title, description, created_at, updated_at) VALUES ('" + note.getTitle() + "', '" + note.getDescription() + "', '" + note.getCreated_at() + "', '" + note.getUpdated_at() + "')");
+        db.execSQL("INSERT INTO notes (title, description, user_id, created_at, updated_at) VALUES ('" + note.getTitle() + "', '" + note.getDescription() + "', '" + note.getUser().getId() + "', '" + note.getCreated_at() + "', '" + note.getUpdated_at() + "')");
     }
 
     public void update(NotesModel note){
@@ -51,15 +53,15 @@ public class NoteDB extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM notes WHERE id = " + id);
     }
 
-    public void deleteAll(){
+    public void deleteAll(UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM notes");
+        db.execSQL("DELETE FROM notes WHERE user_id = " + user.getId());
     }
 
-    public NotesModel[] getAll(){
+    public NotesModel[] getAll(int userId){
         SQLiteDatabase db = this.getReadableDatabase();
         List<NotesModel> notes = new ArrayList<NotesModel>();
-        Cursor cursor = db.rawQuery("SELECT * FROM notes", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM notes WHERE user_id = '" + userId+"'", null);
         if(cursor.moveToFirst()){
             do{
                 NotesModel note = new NotesModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));

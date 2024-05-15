@@ -6,6 +6,7 @@ public class NotesModel {
     private String description;
     private String created_at;
     private String updated_at;
+    private UserModel user;
 
     public NotesModel(int id, String title, String description, String created_at, String updated_at) {
         this.id = id;
@@ -13,6 +14,23 @@ public class NotesModel {
         this.description = description;
         this.created_at = created_at;
         this.updated_at = updated_at;
+    }
+
+    public NotesModel(int id, String title, String description, String created_at, String updated_at, UserModel user) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.user = user;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public int getId() {

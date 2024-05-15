@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CreateNoteView extends AppCompatActivity {
+    public MyApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class CreateNoteView extends AppCompatActivity {
         });
 
         NoteDB noteDB = new NoteDB(getApplicationContext());
+        app = (MyApp) getApplicationContext();
 
         findViewById(R.id.btnSaveNewNote).setOnClickListener(v -> {
             try{
@@ -49,7 +51,7 @@ public class CreateNoteView extends AppCompatActivity {
                 Date date = new Date();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String created_at = formatter.format(date);
-                NotesModel newNote = new NotesModel(0, newNoteTitle, newNoteDescription, created_at, "");
+                NotesModel newNote = new NotesModel(0, newNoteTitle, newNoteDescription, created_at, "", app.getUser());
                 noteDB.insert(newNote);
                 finish();
             } catch (Exception e){

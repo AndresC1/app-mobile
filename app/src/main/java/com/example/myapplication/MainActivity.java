@@ -61,4 +61,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (((MyApp) getApplicationContext()).getUser() != null) {
+            startActivity(new Intent(this, HomeView.class));
+        }
+    }
 }
