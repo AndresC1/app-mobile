@@ -10,17 +10,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.Repository.NoteDB;
+import com.example.myapplication.ViewModel.DateModel;
 import com.example.myapplication.ViewModel.NotesModel;
 import com.example.myapplication.ViewModel.ValidateModel;
-
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CreateNoteView extends AppCompatActivity {
     public MyApp app;
@@ -48,9 +41,8 @@ public class CreateNoteView extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String created_at = formatter.format(date);
+                DateModel date = new DateModel();
+                String created_at = date.getDateNow();
                 NotesModel newNote = new NotesModel(0, newNoteTitle, newNoteDescription, created_at, "", app.getUser());
                 noteDB.insert(newNote);
                 finish();

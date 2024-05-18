@@ -3,8 +3,11 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +21,7 @@ import com.example.myapplication.ViewModel.NotesModel;
 
 public class HomeView extends AppCompatActivity {
     ListView listView;
+    CustomBaseAdapetr customBaseAdapter;
     public MyApp app;
 
     @Override
@@ -38,8 +42,9 @@ public class HomeView extends AppCompatActivity {
         NoteDB noteDB = new NoteDB(getApplicationContext());
 
         listView = (ListView) findViewById(R.id.NotesListView);
-        CustomBaseAdapetr customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(app.getUser().getId()), this);
+        customBaseAdapter = new CustomBaseAdapetr(getApplicationContext(), noteDB.getAll(app.getUser().getId()), this);
         listView.setAdapter(customBaseAdapter);
+        registerForContextMenu(listView);
 
         findViewById(R.id.btnCreateNewNote).setOnClickListener(v -> {
             startActivity(new Intent(this, CreateNoteView.class));
@@ -63,6 +68,38 @@ public class HomeView extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .show();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Select an action");
+        menu.add(0, v.getId(), 0, "Delete");
+        menu.add(0, v.getId(), 0, "Edit");
+    }
+
+    @Override
+    public boolean onContextItemSelected(android.view.MenuItem item) {
+        try{
+            if(item.getTitle() == "Delete" || item.getTitle() == "Edit") {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                String note_id = ((TextView) info.targetView.findViewById(R.id.txtIDNote)).getText().toString();
+                NoteDB noteDB = new NoteDB(getApplicationContext());
+                if (item.getTitle() == "Delete") {
+                    noteDB.delete(Integer.parseInt(note_id));
+                    this.reloadListView();
+                    Toast.makeText(getApplicationContext(), "Deleted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    NotesModel note = noteDB.getNoteById(Integer.parseInt(note_id));
+                    customBaseAdapter.openEditNoteView(note);
+                }
+                return true;
+            }
+            return false;
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     public void reloadListView(){
