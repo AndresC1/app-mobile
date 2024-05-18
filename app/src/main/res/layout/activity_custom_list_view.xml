@@ -13,40 +13,35 @@
     android:layout_alignParentBottom="false"
     android:layout_marginTop="2dp"
     android:baselineAligned="false"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".CustomListView">
 
     <TextView
         android:id="@+id/txtNameNote"
-        android:layout_width="173dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:text="TextView"
+        android:textAlignment="textStart"
         android:textColor="#333"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnEditNote"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_weight="1"
-        android:background="@drawable/background_with_shadow"
-        android:text="Edit" />
+    <TextView
+        android:id="@+id/txtIDNote"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnDeleteNote"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="2dp"
+    <TextView
+        android:id="@+id/txtCreatedAtNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/background_with_shadow"
-        android:text="Delete" />
+        android:paddingStart="10dp"
+        android:text="TextView"
+        android:textSize="12sp" />
 
 </LinearLayout>

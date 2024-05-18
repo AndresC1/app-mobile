@@ -8,16 +8,21 @@ public class DateModel {
     private int month;
     private int year;
     private Date DateNow;
+    private String[] monthName = {
+            "Jan", "Feb", "Mar",
+            "Apr", "May", "Jun", "Jul",
+            "Aug", "Sep", "Oct",
+            "Nov", "Dec"
+    };
 
     public DateModel() {
         this.DateNow = new Date();
         this.day = this.DateNow.getDate();
-        this.month = this.DateNow.getMonth() + 1;
+        this.month = this.DateNow.getMonth();
         this.year = this.DateNow.getYear() + 1900;
     }
 
     public String getDateNow() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(this.DateNow);
+        return this.day + "-" + this.monthName[month] + "-" + this.year;
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ListView;
 
 import com.example.myapplication.ViewModel.NotesModel;
 import com.example.myapplication.ViewModel.UserModel;
@@ -64,12 +63,24 @@ public class NoteDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM notes WHERE user_id = '" + userId+"'", null);
         if(cursor.moveToFirst()){
             do{
-                NotesModel note = new NotesModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                NotesModel note = new NotesModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(5));
                 notes.add(note);
             }while(cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return notes.toArray(new NotesModel[notes.size()]);
+    }
+
+    public NotesModel getNoteById(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM notes WHERE id = " + id, null);
+        if(cursor.moveToFirst()){
+            NotesModel note = new NotesModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(5));
+            cursor.close();
+            db.close();
+            return note;
+        }
+        return null;
     }
 }
