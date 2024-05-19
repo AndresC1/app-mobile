@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
             }
             if (userDB.checkUser(email, password)) {
                 txtErrorLoginUser.setVisibility(View.GONE);
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                 app.setUser(userDB.getUser(email, password));
                 ((EditText) findViewById(R.id.txtEmailLoginUser)).setText("");
                 ((EditText) findViewById(R.id.txtPasswordLoginUser)).setText("");
