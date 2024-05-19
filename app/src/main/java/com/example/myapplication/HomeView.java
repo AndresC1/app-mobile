@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +51,13 @@ public class HomeView extends AppCompatActivity {
 
         findViewById(R.id.btnCreateNewNote).setOnClickListener(v -> {
             startActivity(new Intent(this, CreateNoteView.class));
+        });
+
+        findViewById(R.id.btnPopupMenu).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
         });
     }
 
@@ -119,5 +129,27 @@ public class HomeView extends AppCompatActivity {
         if(app.getUser() == null){
             startActivity(new Intent(this, MainActivity.class));
         }
+    }
+
+    private void showPopupMenu(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.inflate(R.menu.popup_menu);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getTitle().toString()){
+                    case "Logout":
+                        app.setUser(null);
+                        Toast.makeText(getApplicationContext(), "Logout successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HomeView.this, MainActivity.class));
+                        break;
+                    case "User":
+                        startActivity(new Intent(HomeView.this, FragmentView.class));
+                        break;
+                }
+                return true;
+            }
+        });
+        popup.show();
     }
 }

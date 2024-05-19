@@ -83,4 +83,10 @@ public class UserDB extends SQLiteOpenHelper {
         }
         return null;
     }
+
+    public boolean changePassword(int id, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE users SET password = '" + password + "' WHERE id = '" + id + "'");
+        return true;
+    }
 }

@@ -61,4 +61,21 @@ public class UserModel {
         }
         return null;
     }
+
+    public String validateChangePassword(String newPassword, String confirmNewPassword){
+        ValidateModel validateModel = new ValidateModel();
+        if(!validateModel.validatePassword(newPassword)){
+            return "Password must be at least 8 characters";
+        }
+        if (!validateModel.validatePasswordMatch(newPassword, confirmNewPassword)){
+            return "Passwords do not match";
+        }
+        if (!validateModel.validateCharacters(newPassword)){
+            return "Password must contain at least one letter, one number and one special character";
+        }
+        if(validateModel.validatePasswordMatch(password, newPassword)){
+            return "New password must be different from the current password";
+        }
+        return null;
+    }
 }

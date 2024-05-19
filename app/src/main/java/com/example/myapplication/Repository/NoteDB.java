@@ -83,4 +83,10 @@ public class NoteDB extends SQLiteOpenHelper {
         }
         return null;
     }
+
+    public String getCountNotesByUser(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM notes WHERE user_id = " + userId, null);
+        return String.valueOf(cursor.getCount());
+    }
 }
